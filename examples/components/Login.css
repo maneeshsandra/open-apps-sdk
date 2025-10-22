@@ -1,0 +1,136 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--bg-color, #f5f5f5);
+}
+
+.login-container.dark {
+  background: #1a1a1a;
+}
+
+.login-card {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-container.dark .login-card {
+  background: #2d2d2d;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: var(--text-color, #333);
+}
+
+.login-container.dark .login-card h2 {
+  color: white;
+}
+
+.login-card p {
+  text-align: center;
+  color: var(--text-secondary, #666);
+  margin-bottom: 2rem;
+}
+
+.login-container.dark .login-card p {
+  color: #ccc;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-color, #333);
+}
+
+.login-container.dark .form-group label {
+  color: white;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 4px;
+  font-size: 1rem;
+  background: var(--input-bg, white);
+  color: var(--text-color, #333);
+  transition: border-color 0.2s;
+}
+
+.login-container.dark .form-group input {
+  background: #3d3d3d;
+  border-color: #555;
+  color: white;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color, #007bff);
+}
+
+.success-message {
+  color: #155724;
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.login-container.dark .success-message {
+  background: #1b3a1b;
+  border-color: #2d5a2d;
+  color: #a8d5a8;
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--primary-color, #007bff);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+
+.login-button:hover:not(:disabled) {
+  background: var(--primary-hover, #0056b3);
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color, #eee);
+  color: var(--text-secondary, #666);
+  font-size: 0.875rem;
+}
+
+.login-container.dark .login-footer {
+  border-color: #444;
+  color: #ccc;
+}

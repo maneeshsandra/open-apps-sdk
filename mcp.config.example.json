@@ -1,0 +1,36 @@
+{
+  "_comment": "MCP Server Configuration - Copy this to mcp.config.json and customize for your needs. See docs/mcp-configuration.md for full documentation.",
+  "mcpServers": {
+    "weather-server": {
+      "command": "bun",
+      "args": ["examples/mcp-servers/weather-server.ts"],
+      "transport": "stdio",
+      "env": {
+        "API_KEY": "your-api-key-here"
+      }
+    },
+    "filesystem-server": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/allowed/files"],
+      "transport": "stdio"
+    },
+    "sqlite-server": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "--db-path", "/path/to/database.db"],
+      "transport": "stdio"
+    },
+    "github-server": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "transport": "stdio",
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "your-github-token"
+      }
+    },
+    "custom-python-server": {
+      "command": "python",
+      "args": ["path/to/your/server.py"],
+      "transport": "stdio"
+    }
+  }
+}

@@ -1,0 +1,134 @@
+.product-list-container {
+  max-width: 100%;
+  padding: 4px 0;
+}
+
+.product-list-empty {
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.product-card {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.product-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Light theme */
+.product-card.light {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.product-card.light:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Dark theme */
+.product-card.dark {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.product-card.dark:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.product-image {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: white;
+}
+
+.product-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-title {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.product-title.light {
+  color: #1a1a1a;
+}
+
+.product-title.dark {
+  color: #ffffff;
+}
+
+.product-rating {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.product-price {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.product-price.light {
+  color: #059669;
+}
+
+.product-price.dark {
+  color: #34d399;
+}
+
+.product-category {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.product-category.light {
+  background: rgba(0, 0, 0, 0.06);
+  color: #666;
+}
+
+.product-category.dark {
+  background: rgba(255, 255, 255, 0.1);
+  color: #999;
+}
+
+.product-list-more {
+  padding: 8px;
+  text-align: center;
+  font-size: 11px;
+  opacity: 0.5;
+}
