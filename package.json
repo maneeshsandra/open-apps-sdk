@@ -1,10 +1,11 @@
 {
   "name": "open-apps-sdk",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "LLM-agnostic Apps SDK for building conversational apps with custom UI components",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
+  "author": "Maneesh Sandra",
   "exports": {
     ".": "./dist/index.js",
     "./server": "./dist/server.js",
@@ -49,6 +50,7 @@
     "llm",
     "sdk",
     "react",
+    "apps-sdk",
     "mcp",
     "conversational-ai",
     "chatbot",

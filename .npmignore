@@ -1,0 +1,45 @@
+# Bun
+bun.lockb
+
+# Dependencies (bun install)
+node_modules
+
+# Build outputs
+dist
+out
+*.tgz
+
+# Coverage
+coverage
+*.lcov
+
+# Logs
+logs
+_.log
+report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
+
+# Environment
+.env
+.env.*
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# User configuration
+mcp.config.json
+
+# Caches
+.cache
+.eslintcache
+*.tsbuildinfo
+
+# IDEs & system files
+.idea
+.DS_Store
+data/
+.github
+components.config.js
+# Test files
+*.test.*
+src/__tests__/
