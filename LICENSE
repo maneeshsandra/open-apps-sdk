@@ -1,0 +1,39 @@
+MIT License
+
+Copyright (c) 2025 Maneesh Sandra
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+**Repository Distribution Policy:**
+
+This software may be used, modified, and distributed according to the MIT License terms above. However, to maintain the integrity of the Open Apps SDK project and ensure proper attribution:
+
+- **Only GitHub Forks Allowed**: You may NOT create and maintain a separate, independent repository of this project on GitHub or any other platform. All derivative works must be maintained as forks of the original repository at https://github.com/maneeshsandra/open-apps-sdk.
+
+- **Forking Requirement**: If you wish to create a derivative work, maintain your own version, or contribute modifications, you MUST fork this repository on GitHub. Direct copying to create separate repositories is prohibited.
+
+- **Attribution in Forks**: Forks must retain clear attribution to the original Open Apps SDK project and include this license file.
+
+**Attribution Requirement:** When using, modifying, or distributing this software,
+you must give appropriate credit to the original Open Apps SDK repository at
+https://github.com/maneeshsandra/open-apps-sdk. This includes:
+
+- Including this license file in your distribution
+- Providing a link back to the original repository
+- Mentioning "Based on Open Apps SDK" in your documentation or project description
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
