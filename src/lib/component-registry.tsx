@@ -1,42 +1,69 @@
 /**
  * Component Registry
- * Maps component names to their actual React components
- * Used for re-rendering components from stored messages
+ * Manages component registration and mapping to tools
+ * Components are registered programmatically by importing and calling registerComponents()
  */
 
 import React from 'react';
-// Import example components
-import { 
-  WeatherWidget,
-  ProductList,
-  ProductDetail,
-  CartView,
-  UserCarts,
-  UserProfile,
-  Login
-} from '../../examples/components';
 
 // Component Registry Type
 type ComponentMap = {
   [key: string]: React.ComponentType<any>;
 };
 
-// Register all available components here
-const COMPONENT_REGISTRY: ComponentMap = {
-  // Weather components
-  'weather-widget': WeatherWidget,
-  'WeatherWidget': WeatherWidget, // Legacy support
-  
-  // E-commerce components
-  'product-list': ProductList,
-  'product-detail': ProductDetail,
-  'cart-view': CartView,
-  'user-carts': UserCarts,
-  'user-profile': UserProfile,
-  
-  // Authentication components
-  'login': Login,
+// Tool to Component mapping
+type ToolToComponentMap = {
+  [toolName: string]: string;
 };
+
+// Component registration config
+export interface ComponentRegistrationConfig {
+  component: React.ComponentType<any>;
+  tools?: string[];
+  description?: string;
+}
+
+// Registry state
+let COMPONENT_REGISTRY: ComponentMap = {};
+let TOOL_TO_COMPONENT_MAP: ToolToComponentMap = {};
+
+/**
+ * Register multiple components at once
+ * This is the primary way users will register their components
+ * 
+ * @example
+ * registerComponents({
+ *   'weather-widget': {
+ *     component: WeatherWidget,
+ *     tools: ['get_weather', 'get_forecast']
+ *   },
+ *   'product-list': {
+ *     component: ProductList,
+ *     tools: ['get_products']
+ *   }
+ * });
+ */
+export function registerComponents(
+  components: Record<string, ComponentRegistrationConfig>
+): void {
+  Object.entries(components).forEach(([componentName, config]) => {
+    // Register the component
+    COMPONENT_REGISTRY[componentName] = config.component;
+
+    // Map tools to this component
+    if (config.tools && Array.isArray(config.tools)) {
+      config.tools.forEach(toolName => {
+        TOOL_TO_COMPONENT_MAP[toolName] = componentName;
+      });
+    }
+
+    console.log(`✓ Registered component: ${componentName}`);
+  });
+
+  console.log(
+    `Component registry now has ${Object.keys(COMPONENT_REGISTRY).length} components`
+  );
+}
 
 /**
  * Get a component by name from the registry
@@ -85,33 +112,49 @@ export function getRegisteredComponents(): string[] {
 }
 
 /**
- * Map tool name to component name
- * This allows automatic component selection based on the tool used
- */
-const TOOL_TO_COMPONENT_MAP: { [toolName: string]: string } = {
-  // Weather tools
-  'get_weather': 'weather-widget',
-  'get_forecast': 'weather-widget',
-  'get_current_weather': 'weather-widget',
-  
-  // E-commerce product tools
-  'get_products': 'product-list',
-  'get_product': 'product-detail',
-  
-  // E-commerce cart tools
-  'get_cart': 'cart-view',
-  'get_carts': 'user-carts',
-  'get_user_carts': 'user-carts',
-  'add_cart': 'cart-view',
-  'update_cart': 'cart-view',
-  
-  // User tools
-  'get_user': 'user-profile',
-};
-
-/**
  * Get component name for a given tool
+ * Tool-to-component mappings are registered via registerComponents()
  */
 export function getComponentForTool(toolName: string): string | null {
   return TOOL_TO_COMPONENT_MAP[toolName] || null;
+}
+
+/**
+ * Manually register a single component at runtime (for advanced use cases)
+ * Consider using registerComponents() for bulk registration instead
+ */
+export function registerComponent(
+  componentName: string,
+  component: React.ComponentType<any>,
+  associatedTools?: string[]
+): void {
+  COMPONENT_REGISTRY[componentName] = component;
+  
+  if (associatedTools) {
+    associatedTools.forEach(toolName => {
+      TOOL_TO_COMPONENT_MAP[toolName] = componentName;
+    });
+  }
+  
+  console.log(`Manually registered component: ${componentName}`);
+}
+
+/**
+ * Load component configurations from components.config.js
+ * Automatically registers components defined in the config file
+ */
+export async function loadComponentConfig(): Promise<void> {
+  try {
+    const config = await import('../../components.config.js');
+    
+    if (config.components) {
+      registerComponents(config.components);
+      console.log(`✅ Loaded ${Object.keys(config.components).length} component(s) from components.config.js`);
+    } else {
+      console.warn('⚠️  components.config.js does not export a "components" object.');
+    }
+  } catch (error) {
+    console.warn('⚠️  No components.config.js found or failed to load. Create one to configure your components.');
+    console.warn('   See components.config.example.json for examples.');
+  }
 }

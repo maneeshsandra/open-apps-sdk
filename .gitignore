@@ -39,4 +39,4 @@ mcp.config.json
 .DS_Store
 data/
 .github
-components.config.json
+components.config.js

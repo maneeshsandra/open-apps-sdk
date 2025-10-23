@@ -244,6 +244,19 @@ export interface ComponentRender {
 // Component Registry Types
 // ============================================================================
 
+export interface ComponentConfig {
+  module: string; // Path to the component module
+  export: string; // Named export of the component
+  tool?: string[]; // Tools that use this component
+  description?: string;
+}
+
+export interface ComponentsConfig {
+  components: {
+    [componentName: string]: ComponentConfig;
+  };
+}
+
 export interface ComponentRegistration {
   id: string;
   name: string;
