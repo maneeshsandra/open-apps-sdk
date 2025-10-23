@@ -38,3 +38,5 @@ mcp.config.json
 .idea
 .DS_Store
 data/
+.github
+components.config.json
