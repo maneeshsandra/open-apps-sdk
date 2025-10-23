@@ -51,8 +51,9 @@ Once your issue is approved:
    git checkout -b docs/add-hooks-documentation
    ```
 3. **Make your changes** following our coding standards
-4. **Test thoroughly** - run `bun test` and `bun run typecheck`
-5. **Update documentation** if needed
+4. **Write unit tests** for all new features and bug fixes
+5. **Test thoroughly** - run `bun test` and `bun run typecheck`
+6. **Update documentation** if needed
 6. **Commit with clear messages**:
    ```bash
    git commit -m "feat: add new hook for component state management
@@ -131,10 +132,12 @@ test: add unit tests for component registry
 - Clear tool descriptions
 
 ### Testing
+- **Required**: Unit tests must be written for all new features and bug fixes
 - Unit tests for utilities and hooks
 - Integration tests for MCP servers
 - Component testing with React Testing Library
 - 80%+ code coverage target
+- Tests must pass before PR submission
 
 ### Documentation
 - JSDoc comments for public APIs
