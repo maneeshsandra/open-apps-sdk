@@ -22,12 +22,35 @@ export interface LLMAdapter {
 export class OpenAICompatibleAdapter implements LLMAdapter {
   constructor(private config: LLMConfig) {}
 
+  private sanitizeMessagesForOpenAI(messages: any[]): any[] {
+    return messages.map(message => {
+      // Only include fields that are valid for OpenAI API messages
+      const sanitized: any = {
+        role: message.role,
+        content: message.content,
+      };
+
+      // Only include optional fields that are part of OpenAI spec
+      if (message.name && typeof message.name === 'string') {
+        sanitized.name = message.name;
+      }
+      if (message.tool_calls && Array.isArray(message.tool_calls)) {
+        sanitized.tool_calls = message.tool_calls;
+      }
+      if (message.tool_call_id && typeof message.tool_call_id === 'string') {
+        sanitized.tool_call_id = message.tool_call_id;
+      }
+
+      return sanitized;
+    });
+  }
+
   async chat(request: ChatCompletionRequest): Promise<ChatCompletionResponse> {
     const url = `${this.config.baseUrl}/chat/completions`;
     
     const body = {
       model: this.config.model,
-      messages: request.messages,
+      messages: this.sanitizeMessagesForOpenAI(request.messages),
       temperature: request.temperature ?? this.config.temperature ?? 0.7,
       max_tokens: request.max_tokens ?? this.config.maxTokens,
       ...(request.tools && request.tools.length > 0 && {
@@ -64,7 +87,7 @@ export class OpenAICompatibleAdapter implements LLMAdapter {
     
     const body = {
       model: this.config.model,
-      messages: request.messages,
+      messages: this.sanitizeMessagesForOpenAI(request.messages),
       temperature: request.temperature ?? this.config.temperature ?? 0.7,
       max_tokens: request.max_tokens ?? this.config.maxTokens,
       stream: true,
