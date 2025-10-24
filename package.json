@@ -1,41 +1,61 @@
 {
   "name": "open-apps-sdk",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "LLM-agnostic Apps SDK for building conversational apps with custom UI components",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "author": "Maneesh Sandra",
   "exports": {
-    ".": "./dist/index.js",
-    "./server": "./dist/server.js",
-    "./client": "./dist/client.js"
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./server": {
+      "import": "./dist/esm/server.js",
+      "require": "./dist/cjs/server.js"
+    },
+    "./client": {
+      "import": "./dist/esm/client.js",
+      "require": "./dist/cjs/client.js"
+    }
   },
-  "files": [
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/esm/*"
+      ]
+    }
+  },
+    "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
+  "bin": {
+    "open-apps-sdk": "./dist/esm/cli.js"
+  },
   "scripts": {
     "setup": "bun scripts/setup.ts",
     "dev": "bun --hot src/index.ts",
-    "build": "bun build ./src/lib/index.ts --outdir=dist --target=node --format=esm --sourcemap && bun build ./src/lib/server.ts --outdir=dist --target=node --format=esm --sourcemap --outfile=dist/server.js && bun build ./src/lib/client.ts --outdir=dist --target=browser --format=esm --sourcemap --outfile=dist/client.js",
-    "build:client": "bun build ./src/frontend.tsx --outdir=dist/client --target=browser --format=esm --sourcemap",
-    "build:all": "bun run build && bun run build:client",
-    "start": "NODE_ENV=production bun src/index.ts",
-    "test": "bun test",
+    "build": "rm -rf dist && bun run build:esm && bun run build:cjs",
+    "build:esm": "mkdir -p dist/esm && echo '{\"type\": \"module\"}' > dist/esm/package.json && npx tsc --project tsconfig.prod.json && cp src/logo.png dist/esm/",
+    "build:cjs": "mkdir -p dist/cjs && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json && npx tsc --project tsconfig.cjs.json && cp src/logo.png dist/cjs/",
+    "start": "NODE_ENV=production bun src/server.ts",
+    "test": "NODE_ENV=test bun test",
     "typecheck": "bunx tsc --noEmit",
-    "prepublishOnly": "bun run build:all"
+    "prepublishOnly": "bun run build"
   },
   "dependencies": {
-    "react": "^19",
-    "react-dom": "^19",
     "@modelcontextprotocol/sdk": "^1.0.4"
   },
   "devDependencies": {
+    "@types/bun": "latest",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/bun": "latest"
+    "react": "^19",
+    "react-dom": "^19"
   },
   "peerDependencies": {
     "react": ">=18",

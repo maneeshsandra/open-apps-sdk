@@ -4,8 +4,8 @@
  */
 
 import { describe, test, expect } from 'bun:test';
-import { validateMCPConfig } from '../lib/mcp-config';
-import type { MCPServerConfig } from '../lib/types';
+import { validateMCPConfig } from '../src/lib/mcp-config';
+import type { MCPServerConfig } from '../src/lib/types';
 
 describe('MCP Config', () => {
   describe('validateMCPConfig', () => {

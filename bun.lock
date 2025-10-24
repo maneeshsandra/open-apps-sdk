@@ -5,13 +5,17 @@
       "name": "open-apps-sdk",
       "dependencies": {
         "@modelcontextprotocol/sdk": "^1.0.4",
-        "react": "^19",
-        "react-dom": "^19",
       },
       "devDependencies": {
         "@types/bun": "latest",
         "@types/react": "^19",
         "@types/react-dom": "^19",
+        "react": "^19",
+        "react-dom": "^19",
+      },
+      "peerDependencies": {
+        "react": ">=18",
+        "react-dom": ">=18",
       },
     },
   },

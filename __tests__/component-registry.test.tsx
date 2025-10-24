@@ -14,7 +14,7 @@ import {
   getRegisteredComponents,
   getComponentForTool,
   loadComponentConfig
-} from '../lib/component-registry';
+} from '../src/lib/component-registry';
 
 // Mock React components for testing
 const MockComponent1 = () => React.createElement('div', null, 'Mock Component 1');

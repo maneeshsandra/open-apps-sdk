@@ -1,21 +1,12 @@
-import { serve } from "bun";
-import { PORT, initializeMCPServers } from "./server/init";
-import { routes } from "./server/routes";
-import { websocket } from "./server/websocket";
+/**
+ * Open Apps SDK
+ * Main entry point for the SDK
+ * Re-exports everything from server and client entry points
+ */
 
-const server = serve({
-  port: PORT,
-  routes,
-  websocket,
-  development: process.env.NODE_ENV !== "production" && {
-    hmr: true,
-    console: true,
-  },
-});
+// Re-export all server functionality
+export * from './server';
 
-// Start server initialization
-initializeMCPServers().catch(console.error);
-
-console.log(`🚀 Open Apps SDK Server running at ${server.url}`);
-console.log(`📡 WebSocket endpoint: ws://localhost:${PORT}/ws`);
+// Re-export all client functionality
+export * from './client';
 

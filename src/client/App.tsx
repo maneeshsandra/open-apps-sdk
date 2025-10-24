@@ -4,9 +4,10 @@ import "./index.css";
  */
 
 import { useState, useEffect, useRef } from 'react';
-import logo from '../logo.png'
+import logo from '../logo.png';
 import type { Message, ToolCallResult } from '../lib/types';
-import { useComponentContext, ComponentProvider } from '../lib/component-context';
+import { ComponentProvider } from '../lib/component-context';
+import { useTheme } from '../lib/use-open-apps';
 import { renderComponent, hasComponent, getComponentForTool } from '../lib/component-registry';
 
 interface ChatMessage extends Message {
@@ -49,7 +50,7 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const { theme } = useComponentContext();
+  const theme = useTheme();
 
   const isDark = theme === 'dark';
 

@@ -145,6 +145,7 @@ export function registerComponent(
  */
 export async function loadComponentConfig(): Promise<void> {
   try {
+    // @ts-ignore - Dynamic import of config file
     const config = await import('../../components.config.js');
     
     if (config.components) {
