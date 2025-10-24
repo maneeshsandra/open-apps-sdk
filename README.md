@@ -1,5 +1,7 @@
 # Open Apps SDK
 
+![Open Apps SDK Logo](src/logo.png)
+
 > Build LLM-agnostic conversational apps with custom UI components and MCP (Model Context Protocol) servers.
 
 ## 🌟 Overview
@@ -196,6 +198,17 @@ bun run examples/mcp-servers/ecommerce-server.ts
 - User authentication
 - Order management
 
+---
+
+## 📸 Screenshots
+
+### Example 1: Component Registry
+![Component Registry](screenshots/image1.png)
+
+### Example 2: E-commerce Store
+![E-commerce Store](screenshots/image.png)
+
+---
 
 ## 🧩 Component Hooks
 
@@ -277,4 +290,4 @@ MIT License - see [LICENSE](./LICENSE) for details.
 
 **Built with ❤️ by the Open Apps SDK team**
 
-[⭐ Star us on GitHub](https://github.com/maneeshsandra/open-apps-sdk) | [📚 Read the docs](./docs/) 
+[⭐ Star us on GitHub](https://github.com/maneeshsandra/open-apps-sdk) | [📚 Read the docs](./docs/)
