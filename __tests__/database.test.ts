@@ -11,8 +11,8 @@ import {
   createMessage,
   parseStoredMessage,
   generateConversationTitle
-} from '../lib/database';
-import type { CreateMessageParams } from '../lib/database';
+} from '../src/lib/database';
+import type { CreateMessageParams } from '../src/lib/database';
 
 describe('Database', () => {
   describe('Conversation CRUD', () => {

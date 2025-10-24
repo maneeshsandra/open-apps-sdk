@@ -33,6 +33,6 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
   },
-  "include": ["./src", "bun-env.d.ts"],
-  "exclude": ["dist", "node_modules", "./src/__tests__","examples"]
+  "include": ["./src", "bun-env.d.ts", "__tests__"],
+  "exclude": ["dist", "node_modules", "__tests__","examples"]
 }
