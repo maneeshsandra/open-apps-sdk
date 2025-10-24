@@ -13,8 +13,8 @@
     "verbatimModuleSyntax": true,
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": false,
-    "outDir": "dist",
+    "emitDeclarationOnly": true,
+    "declarationDir": "dist",
 
     // Best practices
     "strict": true,
@@ -33,6 +33,6 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
   },
-
-  "exclude": ["dist", "node_modules", "src/__tests__"]
+  "include": ["./src/lib/index.ts", "./src/lib/server.ts", "./src/lib/client.ts", "bun-env.d.ts"],
+  "exclude": ["dist", "node_modules", "src/__tests__","examples"]
 }

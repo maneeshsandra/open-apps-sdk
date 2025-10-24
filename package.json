@@ -1,41 +1,52 @@
 {
   "name": "open-apps-sdk",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "LLM-agnostic Apps SDK for building conversational apps with custom UI components",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "author": "Maneesh Sandra",
   "exports": {
-    ".": "./dist/index.js",
-    "./server": "./dist/server.js",
-    "./client": "./dist/client.js"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server.js",
+      "types": "./dist/server.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client.js",
+      "types": "./dist/client.d.ts"
+    }
   },
-  "files": [
+    "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
+  "bin": {
+    "open-apps-sdk": "./dist/cli.js"
+  },
   "scripts": {
     "setup": "bun scripts/setup.ts",
     "dev": "bun --hot src/index.ts",
-    "build": "bun build ./src/lib/index.ts --outdir=dist --target=node --format=esm --sourcemap && bun build ./src/lib/server.ts --outdir=dist --target=node --format=esm --sourcemap --outfile=dist/server.js && bun build ./src/lib/client.ts --outdir=dist --target=browser --format=esm --sourcemap --outfile=dist/client.js",
-    "build:client": "bun build ./src/frontend.tsx --outdir=dist/client --target=browser --format=esm --sourcemap",
-    "build:all": "bun run build && bun run build:client",
+    "build": "bun bundler.ts",
     "start": "NODE_ENV=production bun src/index.ts",
     "test": "bun test",
     "typecheck": "bunx tsc --noEmit",
-    "prepublishOnly": "bun run build:all"
+    "prepublishOnly": "bun run build"
   },
   "dependencies": {
-    "react": "^19",
-    "react-dom": "^19",
     "@modelcontextprotocol/sdk": "^1.0.4"
   },
   "devDependencies": {
+    "@types/bun": "latest",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/bun": "latest"
+    "react": "^19",
+    "react-dom": "^19"
   },
   "peerDependencies": {
     "react": ">=18",
