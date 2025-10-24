@@ -10,8 +10,19 @@ import { resolve, dirname, join } from 'path';
 import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// Handle __filename and __dirname for both ESM and CJS
+let __filename: string;
+let __dirname: string;
+
+if (typeof import.meta !== 'undefined') {
+  __filename = fileURLToPath(import.meta.url);
+  __dirname = dirname(__filename);
+} else {
+  // In CJS, these are globals
+  __filename = (global as any).__filename;
+  __dirname = (global as any).__dirname;
+}
+
 const sdkRoot = resolve(__dirname, '..');
 
 // Recursive directory copy function
@@ -44,26 +55,28 @@ if (!command) {
   process.exit(0);
 }
 
-switch (command) {
-  case 'init':
-    await handleInit();
-    break;
-  case 'start':
-    await handleStart();
-    break;
-  case 'setup':
-    await handleSetup();
-    break;
-  case 'help':
-  case '--help':
-  case '-h':
-    showHelp();
-    break;
-  default:
-    console.error(`Unknown command: ${command}`);
-    showHelp();
-    process.exit(1);
-}
+(async () => {
+  switch (command) {
+    case 'init':
+      await handleInit();
+      break;
+    case 'start':
+      await handleStart();
+      break;
+    case 'setup':
+      await handleSetup();
+      break;
+    case 'help':
+    case '--help':
+    case '-h':
+      showHelp();
+      break;
+    default:
+      console.error(`Unknown command: ${command}`);
+      showHelp();
+      process.exit(1);
+  }
+})();
 
 async function handleInit() {
   console.log('🚀 Open Apps SDK - Project Initialization');

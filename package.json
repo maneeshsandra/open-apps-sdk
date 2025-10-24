@@ -3,22 +3,29 @@
   "version": "1.0.2",
   "description": "LLM-agnostic Apps SDK for building conversational apps with custom UI components",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "author": "Maneesh Sandra",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
     },
     "./server": {
-      "import": "./dist/server.js",
-      "types": "./dist/server.d.ts"
+      "import": "./dist/esm/server.js",
+      "require": "./dist/cjs/server.js"
     },
     "./client": {
-      "import": "./dist/client.js",
-      "types": "./dist/client.d.ts"
+      "import": "./dist/esm/client.js",
+      "require": "./dist/cjs/client.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/esm/*"
+      ]
     }
   },
     "files": [
@@ -27,13 +34,15 @@
     "LICENSE"
   ],
   "bin": {
-    "open-apps-sdk": "./dist/cli.js"
+    "open-apps-sdk": "./dist/esm/cli.js"
   },
   "scripts": {
     "setup": "bun scripts/setup.ts",
     "dev": "bun --hot src/index.ts",
-    "build": "bun bundler.ts",
-    "start": "NODE_ENV=production bun src/index.ts",
+    "build": "rm -rf dist && bun run build:esm && bun run build:cjs",
+    "build:esm": "mkdir -p dist/esm && echo '{\"type\": \"module\"}' > dist/esm/package.json && npx tsc --project tsconfig.prod.json && cp src/logo.png dist/esm/",
+    "build:cjs": "mkdir -p dist/cjs && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json && npx tsc --project tsconfig.cjs.json && cp src/logo.png dist/cjs/",
+    "start": "NODE_ENV=production bun src/server.ts",
     "test": "bun test",
     "typecheck": "bunx tsc --noEmit",
     "prepublishOnly": "bun run build"
