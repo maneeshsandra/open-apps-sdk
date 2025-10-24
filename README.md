@@ -203,10 +203,10 @@ bun run examples/mcp-servers/ecommerce-server.ts
 ## 📸 Screenshots
 
 ### Example 1: Component Registry
-![Component Registry](screenshots/image1.png)
+![Component Registry](screenshots/image.png)
 
 ### Example 2: E-commerce Store
-![E-commerce Store](screenshots/image.png)
+![E-commerce Store](screenshots/image1.png)
 
 ---
 
