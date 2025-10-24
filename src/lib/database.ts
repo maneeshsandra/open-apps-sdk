@@ -7,7 +7,7 @@ import { Database } from 'bun:sqlite';
 import path from 'path';
 
 // Database file path
-const DB_PATH = path.join(process.cwd(), 'data', 'conversations.db');
+const DB_PATH = process.env.NODE_ENV === 'test' ? path.join(process.cwd(),'data','test.db') : path.join(process.cwd(), 'data', 'conversations.db');
 
 // Initialize database
 let db: Database | null = null;
@@ -31,11 +31,26 @@ export function getDatabase(): Database {
   return db;
 }
 
+/**
+ * Create a database instance with initialized schema
+ * Used for testing with in-memory databases
+ */
+export function createDatabase(dbPath: string = DB_PATH): Database {
+  const database = new Database(dbPath, { create: true });
+  database.run('PRAGMA foreign_keys = ON');
+  initializeSchemaForDb(database);
+  return database;
+}
+
 function initializeSchema() {
   if (!db) return;
+  initializeSchemaForDb(db);
+}
+
+function initializeSchemaForDb(database: Database) {
 
   // Conversations table
-  db.run(`
+  database.run(`
     CREATE TABLE IF NOT EXISTS conversations (
       id TEXT PRIMARY KEY,
       title TEXT NOT NULL,
@@ -45,7 +60,7 @@ function initializeSchema() {
   `);
 
   // Messages table with component metadata
-  db.run(`
+  database.run(`
     CREATE TABLE IF NOT EXISTS messages (
       id TEXT PRIMARY KEY,
       conversation_id TEXT NOT NULL,
@@ -67,9 +82,9 @@ function initializeSchema() {
   `);
 
   // Create indexes for better query performance
-  db.run(`CREATE INDEX IF NOT EXISTS idx_messages_conversation ON messages(conversation_id)`);
-  db.run(`CREATE INDEX IF NOT EXISTS idx_messages_timestamp ON messages(timestamp)`);
-  db.run(`CREATE INDEX IF NOT EXISTS idx_conversations_updated ON conversations(updated_at DESC)`);
+  database.run(`CREATE INDEX IF NOT EXISTS idx_messages_conversation ON messages(conversation_id)`);
+  database.run(`CREATE INDEX IF NOT EXISTS idx_messages_timestamp ON messages(timestamp)`);
+  database.run(`CREATE INDEX IF NOT EXISTS idx_conversations_updated ON conversations(updated_at DESC)`);
 }
 
 // Types

@@ -43,7 +43,7 @@
     "build:esm": "mkdir -p dist/esm && echo '{\"type\": \"module\"}' > dist/esm/package.json && npx tsc --project tsconfig.prod.json && cp src/logo.png dist/esm/",
     "build:cjs": "mkdir -p dist/cjs && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json && npx tsc --project tsconfig.cjs.json && cp src/logo.png dist/cjs/",
     "start": "NODE_ENV=production bun src/server.ts",
-    "test": "bun test",
+    "test": "NODE_ENV=test bun test",
     "typecheck": "bunx tsc --noEmit",
     "prepublishOnly": "bun run build"
   },
